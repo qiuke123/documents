@@ -146,6 +146,8 @@ MySQL的监控项很多，对于监控数据来讲，首先做到细，尽可能
 * CPU使用率TOP情况
 * 内存使用率TOP情况
 * IOPS使用率TOP情况
+
+**grafana 中的展示效果**
 ![mysql4](images/mysql_explorer4.png)
 
 ## 五 多云监控
@@ -170,3 +172,32 @@ MySQL的监控项很多，对于监控数据来讲，首先做到细，尽可能
 
 ![dashboard](images/dashboard1.png)
 ![dashboard2](images/listing_dashboard2.png)
+
+## 七 K8S的基础监控
+K8S监控，promethus有官方的一套operator，功能完善，只需要根据自己的一些需求去增增减减就ok了，我这里主要展示一下在grafana中的监控数据。主要分为三部分：节点资源总览，微服务(容器名)资源总览，Pod资源总览
+
+### 1.节点资源总览
+节点资源指的是k8s中node节点的所有资源，有以下几项：
+* 资源使用率，资源请示率，资源Limit
+* 节点数，pod数，上限pod，svc
+* 网络流量
+
+以上资源的表格和曲线图
+
+**grafana 中的展示效果**
+![node1](images/node1.png)
+
+### 2. 微服务(容器名)资源总览
+这里的微服务和Pod不是完全等同的，一个pod上可能包含有多个微服务。一个微服务中包括所有docker容器的整体资源。
+**grafana 中的展示效果**
+![node1](images/container1.png)
+
+### 3. Pod资源总览
+pod资源主要监控的是单个pod的资源使用情况，pod 资源使用率，pod 资源请求,pod 资源limit，这三个参数要有相对应的配置，否则会很容易导致pod异常重启。所以根据监控信息具体去调优是比较好的方法。
+ **grafana 中的展示效果**
+![node1](images/pod1.png)
+
+### 4 ingress 监控展示
+ingress这里使用的是nginx,和nginx的监控没有太大的差别，在K8s中其他应用的监控和在物理机上应用监控本身没有太大的差别，只是获取监控数据的方式不同，就不再详细介绍了。
+ **grafana 中的展示效果**
+![node1](images/ingress1.png)
